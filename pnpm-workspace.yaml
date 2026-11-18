@@ -1,0 +1,2 @@
+minimumReleaseAgeExclude:
+  - '@sentry/server-utils@11.14.0'
