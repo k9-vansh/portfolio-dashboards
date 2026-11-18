@@ -1,9 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { LoadingButton } from '@/components/ui/loading-button';
+import { Input } from '@/components/ui/input';
 import { Icons } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import {
@@ -63,14 +65,72 @@ function ToolMarker({ part }: { part: ToolPart }) {
   );
 }
 
+const SUGGESTED_PROMPTS = [
+  'Run telemetry diagnostic across model fleet',
+  'Which agent fleets have elevated error rates?',
+  'Audit prompt caching & token savings'
+];
+
 export function AiChatDemo() {
   const { messages, sendMessage, status, setMessages } = useChat<DemoUIMessage>({
     messages: initialMessages,
     transport: chatTransport
   });
 
+  const [input, setInput] = useState('');
   const nextMessage = demoChat.next(messages);
   const isBusy = status === 'submitted' || status === 'streaming';
+
+  const handleCustomSend = (customText?: string) => {
+    const textToSend = customText || input;
+    if (!textToSend.trim() || isBusy) return;
+
+    if (nextMessage) {
+      void sendMessage(nextMessage);
+      setInput('');
+      return;
+    }
+
+    // Interactive fallback for dynamic queries
+    const userMsg: DemoUIMessage = {
+      id: `user-${Date.now()}`,
+      role: 'user',
+      parts: [{ type: 'text', text: textToSend }]
+    };
+
+    const assistMsg: DemoUIMessage = {
+      id: `asst-${Date.now()}`,
+      role: 'assistant',
+      parts: [
+        {
+          type: 'reasoning',
+          text: `Analyzing active cluster telemetry and provider routing logs for: "${textToSend}"`
+        },
+        {
+          type: 'dynamic-tool',
+          toolName: 'queryTelemetry',
+          toolCallId: `call-${Date.now()}`,
+          input: { metric: 'telemetry', timeRange: '24h' },
+          state: 'output-available',
+          output: {
+            target: textToSend,
+            cluster: 'us-east-prod-cluster',
+            activeInstances: 36,
+            avgLatency: '142ms',
+            status: '100% operational',
+            routingRecommendation: 'Optimal'
+          }
+        },
+        {
+          type: 'text',
+          text: `Telemetry audit executed. The 36 active worker agent instances are operating within nominal thresholds (142ms P50 latency, zero memory leaks, and $412 in prompt cache savings recorded today). No intervention required.`
+        }
+      ]
+    };
+
+    setMessages([...messages, userMsg, assistMsg]);
+    setInput('');
+  };
 
   return (
     <div className='relative flex flex-1'>
@@ -80,11 +140,13 @@ export function AiChatDemo() {
             <Icons.sparkles className='size-4' />
           </div>
           <div className='min-w-0'>
-            <p className='text-sm font-medium'>Release Assistant</p>
-            <p className='text-muted-foreground text-xs'>Scripted demo · streamed via useChat</p>
+            <p className='text-sm font-semibold'>AgentOps Copilot</p>
+            <p className='text-muted-foreground text-xs'>
+              Autonomous Fleet Diagnostics · Tool-Calling Agent
+            </p>
           </div>
-          <Badge variant='outline' className='ml-auto capitalize'>
-            {status}
+          <Badge variant='outline' className='ml-auto capitalize text-xs font-mono'>
+            {isBusy ? 'Processing' : status}
           </Badge>
         </div>
 
@@ -93,12 +155,29 @@ export function AiChatDemo() {
             <MessageScrollerViewport>
               <MessageScrollerContent className='px-4 py-4'>
                 {messages.length === 0 ? (
-                  <div className='text-muted-foreground flex flex-1 flex-col items-center justify-center gap-2 text-center text-sm'>
-                    <Icons.sparkles className='size-8' />
-                    <p>
-                      Press <span className='text-foreground font-medium'>Send</span> to stream the
-                      conversation.
-                    </p>
+                  <div className='text-muted-foreground flex flex-1 flex-col items-center justify-center gap-3 py-10 text-center text-sm'>
+                    <div className='bg-primary/10 text-primary flex size-12 items-center justify-center rounded-full'>
+                      <Icons.sparkles className='size-6' />
+                    </div>
+                    <div>
+                      <p className='font-semibold text-foreground text-base'>
+                        AgentOps Fleet Assistant
+                      </p>
+                      <p className='text-xs mt-1'>
+                        Ask questions or trigger live telemetry tool calls below.
+                      </p>
+                    </div>
+                    <div className='flex flex-wrap justify-center gap-1.5 mt-2 max-w-md'>
+                      {SUGGESTED_PROMPTS.map((prompt) => (
+                        <button
+                          key={prompt}
+                          onClick={() => handleCustomSend(prompt)}
+                          className='text-xs bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground px-2.5 py-1 rounded-full border transition-colors'
+                        >
+                          {prompt}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 ) : (
                   messages.map((message) => {
@@ -134,7 +213,7 @@ export function AiChatDemo() {
                                     variant={isUser ? 'default' : 'muted'}
                                     align={isUser ? 'end' : 'start'}
                                   >
-                                    <BubbleContent className='whitespace-pre-wrap'>
+                                    <BubbleContent className='whitespace-pre-wrap text-sm'>
                                       {part.text}
                                     </BubbleContent>
                                   </Bubble>
@@ -146,7 +225,9 @@ export function AiChatDemo() {
                                     <MarkerIcon>
                                       <Icons.sparkles />
                                     </MarkerIcon>
-                                    <MarkerContent className='italic'>{part.text}</MarkerContent>
+                                    <MarkerContent className='italic text-xs text-muted-foreground'>
+                                      {part.text}
+                                    </MarkerContent>
                                   </Marker>
                                 );
                               }
@@ -170,7 +251,9 @@ export function AiChatDemo() {
                       </MessageAvatar>
                       <MessageContent>
                         <Marker>
-                          <MarkerContent className='shimmer'>Thinking…</MarkerContent>
+                          <MarkerContent className='shimmer'>
+                            Querying fleet telemetry…
+                          </MarkerContent>
                         </Marker>
                       </MessageContent>
                     </Message>
@@ -182,32 +265,53 @@ export function AiChatDemo() {
           </MessageScroller>
         </MessageScrollerProvider>
 
-        <div className='flex shrink-0 items-center gap-2 border-t px-4 py-3'>
-          <Button
-            variant='outline'
-            size='sm'
-            onClick={() => setMessages(demoChat.get(0))}
-            disabled={isBusy || messages.length === 0}
-          >
-            Restart
-          </Button>
-          <LoadingButton
-            className='ml-auto'
-            loading={isBusy}
-            loadingLabel='Streaming response'
-            disabled={!nextMessage}
-            onClick={() => {
-              if (nextMessage) void sendMessage(nextMessage);
+        <div className='flex flex-col gap-2 border-t p-3 bg-card'>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleCustomSend();
             }}
+            className='flex items-center gap-2'
           >
-            {nextMessage ? (
-              <>
-                <Icons.send className='size-4' /> Send next message
-              </>
-            ) : (
-              'End of demo'
-            )}
-          </LoadingButton>
+            <Input
+              placeholder={
+                nextMessage
+                  ? 'Type a question or press Send next message...'
+                  : 'Ask AgentOps copilot anything...'
+              }
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              disabled={isBusy}
+              className='text-sm h-9'
+            />
+            <Button
+              type='button'
+              variant='outline'
+              size='sm'
+              onClick={() => setMessages(demoChat.get(0))}
+              disabled={isBusy || messages.length === 0}
+              className='h-9 px-3 shrink-0'
+            >
+              Reset
+            </Button>
+            <LoadingButton
+              type='submit'
+              size='sm'
+              className='h-9 px-3 shrink-0'
+              loading={isBusy}
+              loadingLabel='Streaming'
+            >
+              {nextMessage && !input.trim() ? (
+                <>
+                  <Icons.send className='size-3.5 mr-1.5' /> Send next turn
+                </>
+              ) : (
+                <>
+                  <Icons.send className='size-3.5 mr-1.5' /> Send
+                </>
+              )}
+            </LoadingButton>
+          </form>
         </div>
       </div>
     </div>

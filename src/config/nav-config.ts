@@ -38,7 +38,7 @@ export const navGroups: NavGroup[] = [
     label: 'Overview',
     items: [
       {
-        title: 'Dashboard',
+        title: 'Telemetry & Ops',
         url: '/dashboard/overview',
         icon: 'dashboard',
         isActive: false,
@@ -61,7 +61,7 @@ export const navGroups: NavGroup[] = [
         access: { requireOrg: true }
       },
       {
-        title: 'Product',
+        title: 'Model Registry',
         url: '/dashboard/product',
         icon: 'product',
         shortcut: ['p', 'p'],
@@ -69,7 +69,7 @@ export const navGroups: NavGroup[] = [
         items: []
       },
       {
-        title: 'Users',
+        title: 'Users & API Keys',
         url: '/dashboard/users',
         icon: 'teams',
         shortcut: ['u', 'u'],
@@ -77,7 +77,7 @@ export const navGroups: NavGroup[] = [
         items: []
       },
       {
-        title: 'Kanban',
+        title: 'Agent Tasks',
         url: '/dashboard/kanban',
         icon: 'kanban',
         shortcut: ['k', 'k'],
@@ -85,7 +85,7 @@ export const navGroups: NavGroup[] = [
         items: []
       },
       {
-        title: 'Chat',
+        title: 'Fleet Channels',
         url: '/dashboard/chat',
         icon: 'chat',
         shortcut: ['c', 'c'],
@@ -93,7 +93,7 @@ export const navGroups: NavGroup[] = [
         items: []
       },
       {
-        title: 'AI Chat',
+        title: 'Agent Copilot',
         url: '/dashboard/ai-chat',
         icon: 'sparkles',
         shortcut: ['a', 'i'],

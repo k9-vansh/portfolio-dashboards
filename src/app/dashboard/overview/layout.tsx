@@ -29,88 +29,100 @@ export default async function OverViewLayout({
     <PageContainer>
       <div className='flex flex-1 flex-col gap-4'>
         <div className='flex items-center justify-between'>
-          <h2 className='text-2xl font-bold tracking-tight'>Hi, Welcome back 👋</h2>
+          <div>
+            <h2 className='text-2xl font-bold tracking-tight'>Telemetry & Fleet Operations</h2>
+            <p className='text-muted-foreground text-sm'>
+              Real-time inference metrics, token consumption, and autonomous agent orchestration.
+            </p>
+          </div>
+          <div className='hidden items-center gap-2 md:flex'>
+            <Badge variant='outline' className='gap-1.5 px-3 py-1 font-mono text-xs'>
+              <span className='size-2 rounded-full bg-emerald-500 animate-pulse' />
+              Fleet Status: 100% Operational
+            </Badge>
+          </div>
         </div>
 
         <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs md:grid-cols-2 lg:grid-cols-4'>
           <Card className='@container/card'>
             <CardHeader>
-              <CardDescription>Total Revenue</CardDescription>
+              <CardDescription>Total Tokens Streamed</CardDescription>
               <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
-                $1,250.00
+                148.6M
               </CardTitle>
               <CardAction>
                 <Badge variant='outline'>
                   <Icons.trendingUp />
-                  +12.5%
+                  +24.8%
                 </Badge>
               </CardAction>
             </CardHeader>
             <CardFooter className='flex-col items-start gap-1.5 text-sm'>
               <div className='line-clamp-1 flex gap-2 font-medium'>
-                Trending up this month <Icons.trendingUp className='size-4' />
+                4.8M processed today <Icons.trendingUp className='size-4' />
               </div>
-              <div className='text-muted-foreground'>Visitors for the last 6 months</div>
+              <div className='text-muted-foreground'>Across 12 multi-region clusters</div>
             </CardFooter>
           </Card>
           <Card className='@container/card'>
             <CardHeader>
-              <CardDescription>New Customers</CardDescription>
+              <CardDescription>Avg Inference Latency</CardDescription>
               <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
-                1,234
+                142ms
               </CardTitle>
               <CardAction>
                 <Badge variant='outline'>
                   <Icons.trendingDown />
-                  -20%
+                  -18.4%
                 </Badge>
               </CardAction>
             </CardHeader>
             <CardFooter className='flex-col items-start gap-1.5 text-sm'>
               <div className='line-clamp-1 flex gap-2 font-medium'>
-                Down 20% this period <Icons.trendingDown className='size-4' />
+                P95: 210ms · P99: 380ms <Icons.trendingDown className='size-4 text-emerald-500' />
               </div>
-              <div className='text-muted-foreground'>Acquisition needs attention</div>
+              <div className='text-muted-foreground'>TTFT reduced via speculative decoding</div>
             </CardFooter>
           </Card>
           <Card className='@container/card'>
             <CardHeader>
-              <CardDescription>Active Accounts</CardDescription>
+              <CardDescription>Compute & LLM Spend</CardDescription>
               <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
-                45,678
+                $2,845.50
               </CardTitle>
               <CardAction>
                 <Badge variant='outline'>
-                  <Icons.trendingUp />
-                  +12.5%
+                  <Icons.trendingDown />
+                  -8.2%
                 </Badge>
               </CardAction>
             </CardHeader>
             <CardFooter className='flex-col items-start gap-1.5 text-sm'>
               <div className='line-clamp-1 flex gap-2 font-medium'>
-                Strong user retention <Icons.trendingUp className='size-4' />
+                Saved $412 on cached prompts{' '}
+                <Icons.trendingDown className='size-4 text-emerald-500' />
               </div>
-              <div className='text-muted-foreground'>Engagement exceed targets</div>
+              <div className='text-muted-foreground'>Target budget: $3,500/mo</div>
             </CardFooter>
           </Card>
           <Card className='@container/card'>
             <CardHeader>
-              <CardDescription>Growth Rate</CardDescription>
+              <CardDescription>Active Agent Fleets</CardDescription>
               <CardTitle className='text-2xl font-semibold tabular-nums @[250px]/card:text-3xl'>
-                4.5%
+                36 Deployed
               </CardTitle>
               <CardAction>
                 <Badge variant='outline'>
                   <Icons.trendingUp />
-                  +4.5%
+                  +6 new
                 </Badge>
               </CardAction>
             </CardHeader>
             <CardFooter className='flex-col items-start gap-1.5 text-sm'>
               <div className='line-clamp-1 flex gap-2 font-medium'>
-                Steady performance increase <Icons.trendingUp className='size-4' />
+                99.94% task success rate <Icons.trendingUp className='size-4' />
               </div>
-              <div className='text-muted-foreground'>Meets growth projections</div>
+              <div className='text-muted-foreground'>1.2M autonomous tool executions</div>
             </CardFooter>
           </Card>
         </div>

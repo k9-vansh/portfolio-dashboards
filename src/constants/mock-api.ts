@@ -19,26 +19,91 @@ export type Product = {
   updated_at: string;
 };
 
-function generateRandomProductData(id: number): Product {
-  const categories = [
-    'Electronics',
-    'Furniture',
-    'Clothing',
-    'Toys',
-    'Groceries',
-    'Books',
-    'Jewelry',
-    'Beauty Products'
-  ];
+const aiModelsCatalog = [
+  {
+    name: 'Claude 3.7 Sonnet',
+    desc: 'Hybrid reasoning and fast response engine for complex software engineering and agent workflows.',
+    cat: 'llm',
+    price: 3.0
+  },
+  {
+    name: 'Gemini 2.5 Flash',
+    desc: 'Ultra-low latency multimodal model optimized for real-time tool calling and high token throughput.',
+    cat: 'llm',
+    price: 0.15
+  },
+  {
+    name: 'GPT-4o Reasoning Core',
+    desc: 'Flagship multimodal frontier model with vision, audio, and code analysis capabilities.',
+    cat: 'vision',
+    price: 2.5
+  },
+  {
+    name: 'DeepSeek R1 Distill',
+    desc: 'Open-weights reasoning model optimized for mathematical logic and formal verification.',
+    cat: 'code',
+    price: 0.55
+  },
+  {
+    name: 'Llama 3.3 70B Instruct',
+    desc: 'High-throughput open source model deployed on dedicated H100 GPU clusters.',
+    cat: 'llm',
+    price: 0.8
+  },
+  {
+    name: 'Claude 3.5 Haiku',
+    desc: 'Sub-150ms lightweight model for high-frequency customer triage and classification agents.',
+    cat: 'llm',
+    price: 0.25
+  },
+  {
+    name: 'Gemini 2.5 Pro Multimodal',
+    desc: '2M token context window model for large codebase indexing and document RAG.',
+    cat: 'vision',
+    price: 1.25
+  },
+  {
+    name: 'BGE-M3 Dense Embedder',
+    desc: '1024-dim dense embedding service for multilingual semantic search and vector indexing.',
+    cat: 'embedding',
+    price: 0.02
+  },
+  {
+    name: 'Qwen 2.5 Coder 32B',
+    desc: 'Specialized code synthesis model for repository-wide refactoring and unit test creation.',
+    cat: 'code',
+    price: 0.4
+  },
+  {
+    name: 'Voyage AI Multimodal Embeddings',
+    desc: 'Vector representation model for images, architecture diagrams, and financial tables.',
+    cat: 'embedding',
+    price: 0.08
+  },
+  {
+    name: 'Mistral Large 2',
+    desc: 'Enterprise reasoning model with strong multilingual fluency and strict JSON schema output.',
+    cat: 'llm',
+    price: 2.0
+  },
+  {
+    name: 'Whisper V3 Large Turbo',
+    desc: 'Real-time audio transcription and translation model for voice agent fleets.',
+    cat: 'vision',
+    price: 0.006
+  }
+];
 
+function generateRandomProductData(id: number): Product {
+  const model = aiModelsCatalog[(id - 1) % aiModelsCatalog.length];
   return {
     id,
-    name: faker.commerce.productName(),
-    description: faker.commerce.productDescription(),
-    created_at: faker.date.between({ from: '2022-01-01', to: '2023-12-31' }).toISOString(),
-    price: parseFloat(faker.commerce.price({ min: 5, max: 500, dec: 2 })),
-    photo_url: `https://api.slingacademy.com/public/sample-products/${id}.png`,
-    category: faker.helpers.arrayElement(categories),
+    name: model.name,
+    description: model.desc,
+    created_at: faker.date.between({ from: '2024-01-01', to: '2024-12-31' }).toISOString(),
+    price: model.price,
+    photo_url: `https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=128&auto=format&fit=crop&q=80`,
+    category: model.cat,
     updated_at: faker.date.recent().toISOString()
   };
 }

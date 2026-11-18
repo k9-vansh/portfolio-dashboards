@@ -13,21 +13,21 @@ import { Badge } from '@/components/ui/badge';
 import { Icons } from '@/components/icons';
 
 const chartData = [
-  { month: 'January', desktop: 186, mobile: 80 },
-  { month: 'February', desktop: 305, mobile: 200 },
-  { month: 'March', desktop: 237, mobile: 120 },
-  { month: 'April', desktop: 73, mobile: 190 },
-  { month: 'May', desktop: 209, mobile: 130 },
-  { month: 'June', desktop: 214, mobile: 140 }
+  { month: 'January', hostedInference: 1420, localCompute: 680 },
+  { month: 'February', hostedInference: 1850, localCompute: 720 },
+  { month: 'March', hostedInference: 1640, localCompute: 690 },
+  { month: 'April', hostedInference: 1210, localCompute: 580 },
+  { month: 'May', hostedInference: 1530, localCompute: 610 },
+  { month: 'June', hostedInference: 1380, localCompute: 540 }
 ];
 
 const chartConfig = {
-  desktop: {
-    label: 'Desktop',
+  hostedInference: {
+    label: 'Hosted Cloud API ($)',
     color: 'var(--chart-1)'
   },
-  mobile: {
-    label: 'Mobile',
+  localCompute: {
+    label: 'Self-Hosted Clusters ($)',
     color: 'var(--chart-2)'
   }
 } satisfies ChartConfig;
@@ -37,13 +37,15 @@ export function BarGraph() {
     <Card>
       <CardHeader>
         <CardTitle>
-          Bar Chart - Multiple
+          Inference Spend: Cloud APIs vs Dedicated Compute
           <Badge variant='outline'>
             <Icons.trendingDown />
-            -5.2%
+            -8.2%
           </Badge>
         </CardTitle>
-        <CardDescription>January - June 2025</CardDescription>
+        <CardDescription>
+          Monthly infrastructure spend showing prompt caching savings
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -70,15 +72,15 @@ export function BarGraph() {
               content={<ChartTooltipContent indicator='dashed' hideLabel />}
             />
             <Bar
-              dataKey='desktop'
+              dataKey='hostedInference'
               color='var(--chart-1)'
-              fill='var(--color-desktop)'
+              fill='var(--color-hostedInference)'
               shape={<CustomHatchedBar isHatched={false} />}
               radius={4}
             />
             <Bar
-              dataKey='mobile'
-              fill='var(--color-mobile)'
+              dataKey='localCompute'
+              fill='var(--color-localCompute)'
               shape={<CustomHatchedBar />}
               radius={4}
             />

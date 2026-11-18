@@ -23,28 +23,28 @@ const initialColumns: Record<string, Task[]> = {
   backlog: [
     {
       id: '1',
-      title: 'Migrate to Stripe billing API',
+      title: 'Fine-tune DeepSeek R1 for SQL query synthesis',
       priority: 'high',
       assignee: 'Sarah Chen',
       dueDate: '2026-04-08'
     },
     {
       id: '2',
-      title: 'Add CSV export to reports',
+      title: 'Implement speculative decoding on Llama 3.3',
       priority: 'medium',
       assignee: 'Marcus Rivera',
       dueDate: '2026-04-12'
     },
     {
       id: '3',
-      title: 'Update onboarding flow copy',
+      title: 'Cache prompt prefixes for Claude 3.7 agents',
       priority: 'low',
       assignee: 'Priya Sharma',
       dueDate: '2026-04-15'
     },
     {
       id: '9',
-      title: 'Audit RBAC permissions',
+      title: 'Benchmark Gemini 2.5 Flash vs GPT-4o latency',
       priority: 'medium',
       assignee: 'Jordan Kim',
       dueDate: '2026-04-10'
@@ -53,21 +53,21 @@ const initialColumns: Record<string, Task[]> = {
   inProgress: [
     {
       id: '4',
-      title: 'Refactor notification service',
+      title: 'Build fallback router for LLM rate-limit failover',
       priority: 'high',
       assignee: 'Alex Turner',
       dueDate: '2026-04-03'
     },
     {
       id: '5',
-      title: 'Build team invitation flow',
+      title: 'Deploy Vector Embeddings ETL sync to Vector DB',
       priority: 'medium',
       assignee: 'Emily Nakamura',
       dueDate: '2026-04-06'
     },
     {
       id: '10',
-      title: 'Fix timezone handling in scheduler',
+      title: 'Evaluate tool sandboxing for Python code agent',
       priority: 'high',
       assignee: 'Sarah Chen',
       dueDate: '2026-04-04'
@@ -76,21 +76,21 @@ const initialColumns: Record<string, Task[]> = {
   done: [
     {
       id: '6',
-      title: 'SSO integration with Okta',
+      title: 'Provision multi-region inference clusters on H100s',
       priority: 'high',
       assignee: 'Jordan Kim',
       dueDate: '2026-03-22'
     },
     {
       id: '7',
-      title: 'Dashboard analytics charts',
+      title: 'Integrate Vercel AI SDK streaming telemetry',
       priority: 'medium',
       assignee: 'Marcus Rivera',
       dueDate: '2026-03-20'
     },
     {
       id: '8',
-      title: 'Webhook retry mechanism',
+      title: 'Set up semantic cache for system prompts',
       priority: 'low',
       assignee: 'Alex Turner',
       dueDate: '2026-03-18'

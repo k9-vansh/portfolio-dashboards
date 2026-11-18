@@ -5,8 +5,8 @@ import NewTaskDialog from './new-task-dialog';
 export default function KanbanViewPage() {
   return (
     <PageContainer
-      pageTitle='Kanban'
-      pageDescription='Manage tasks with drag and drop'
+      pageTitle='Agent Fleet Tasks'
+      pageDescription='Autonomous agent workflows, pipeline jobs, and human-in-the-loop task board'
       pageHeaderAction={<NewTaskDialog />}
     >
       <KanbanBoard />

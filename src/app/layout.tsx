@@ -20,31 +20,31 @@ export const metadata: Metadata = {
     ? { metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL) }
     : {}),
   title: {
-    default: 'Shadcn Dashboard - Next.js Admin Dashboard Template',
-    template: '%s | Shadcn Dashboard'
+    default: 'AgentOps | AI Fleet & Token Telemetry Dashboard',
+    template: '%s | AgentOps'
   },
   description:
-    'Free, open source admin dashboard starter built with Next.js 16, shadcn/ui, Tailwind CSS, and TypeScript.',
+    'Production-ready AI Agent operations platform, token telemetry, latency monitoring, and multi-tenant agent fleet management built with Next.js 16 and Tailwind CSS.',
   openGraph: {
-    title: 'Shadcn Dashboard - Next.js Admin Dashboard Template',
+    title: 'AgentOps | AI Fleet & Token Telemetry Dashboard',
     description:
-      'Free, open source admin dashboard starter built with Next.js 16, shadcn/ui, Tailwind CSS, and TypeScript.',
-    siteName: 'Shadcn Dashboard',
+      'Production-ready AI Agent operations platform, token telemetry, latency monitoring, and multi-tenant agent fleet management built with Next.js 16 and Tailwind CSS.',
+    siteName: 'AgentOps',
     type: 'website',
     images: [
       {
         url: '/shadcn-dashboard.png',
         width: 3200,
         height: 1600,
-        alt: 'Shadcn Dashboard overview page'
+        alt: 'AgentOps Dashboard overview page'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Shadcn Dashboard - Next.js Admin Dashboard Template',
+    title: 'AgentOps | AI Fleet & Token Telemetry Dashboard',
     description:
-      'Free, open source admin dashboard starter built with Next.js 16, shadcn/ui, Tailwind CSS, and TypeScript.',
+      'Production-ready AI Agent operations platform, token telemetry, latency monitoring, and multi-tenant agent fleet management built with Next.js 16 and Tailwind CSS.',
     images: ['/shadcn-dashboard.png']
   }
 };
@@ -85,7 +85,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <NuqsAdapter>
           <ThemeProvider
             attribute='class'
-            defaultTheme='system'
+            defaultTheme='dark'
             enableSystem
             disableTransitionOnChange
             enableColorScheme

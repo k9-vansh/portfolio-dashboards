@@ -96,7 +96,7 @@ export function OrgSwitcher() {
             className='data-popup-open:bg-sidebar-accent data-popup-open:text-sidebar-accent-foreground'
           >
             <div className='bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 shrink-0 items-center justify-center overflow-hidden rounded-lg'>
-              <Icons.add className='size-4' />
+              <Icons.sparkles className='size-4' />
             </div>
             <div
               className={`grid flex-1 text-left text-sm leading-tight transition-all duration-200 ease-in-out ${
@@ -105,8 +105,8 @@ export function OrgSwitcher() {
                   : 'visible max-w-full opacity-100'
               }`}
             >
-              <span className='truncate font-medium'>Create organization</span>
-              <span className='text-muted-foreground truncate text-xs'>Get started</span>
+              <span className='truncate font-semibold'>AgentOps Cloud</span>
+              <span className='text-muted-foreground truncate text-xs'>Fleet Telemetry · Pro</span>
             </div>
             <Icons.chevronsUpDown
               className={`text-muted-foreground ml-auto transition-all duration-200 ease-in-out ${

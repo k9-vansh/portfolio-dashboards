@@ -14,27 +14,27 @@ import { Icons } from '@/components/icons';
 import React from 'react';
 
 const chartData = [
-  { month: 'January', desktop: 342, mobile: 245 },
-  { month: 'February', desktop: 876, mobile: 654 },
-  { month: 'March', desktop: 512, mobile: 387 },
-  { month: 'April', desktop: 629, mobile: 521 },
-  { month: 'May', desktop: 458, mobile: 412 },
-  { month: 'June', desktop: 781, mobile: 598 },
-  { month: 'July', desktop: 394, mobile: 312 },
-  { month: 'August', desktop: 925, mobile: 743 },
-  { month: 'September', desktop: 647, mobile: 489 },
-  { month: 'October', desktop: 532, mobile: 476 },
-  { month: 'November', desktop: 803, mobile: 687 },
-  { month: 'December', desktop: 271, mobile: 198 }
+  { month: 'January', promptTokens: 34.2, completionTokens: 14.5 },
+  { month: 'February', promptTokens: 48.6, completionTokens: 25.4 },
+  { month: 'March', promptTokens: 41.2, completionTokens: 21.7 },
+  { month: 'April', promptTokens: 52.9, completionTokens: 28.1 },
+  { month: 'May', promptTokens: 58.8, completionTokens: 32.2 },
+  { month: 'June', promptTokens: 68.1, completionTokens: 39.8 },
+  { month: 'July', promptTokens: 62.4, completionTokens: 35.2 },
+  { month: 'August', promptTokens: 82.5, completionTokens: 44.3 },
+  { month: 'September', promptTokens: 74.7, completionTokens: 41.9 },
+  { month: 'October', promptTokens: 89.2, completionTokens: 48.6 },
+  { month: 'November', promptTokens: 102.3, completionTokens: 54.7 },
+  { month: 'December', promptTokens: 118.5, completionTokens: 62.8 }
 ];
 
 const chartConfig = {
-  desktop: {
-    label: 'Desktop',
+  promptTokens: {
+    label: 'Prompt Tokens (M)',
     color: 'var(--chart-1)'
   },
-  mobile: {
-    label: 'Mobile',
+  completionTokens: {
+    label: 'Completion Tokens (M)',
     color: 'var(--chart-2)'
   }
 } satisfies ChartConfig;
@@ -44,13 +44,13 @@ export function AreaGraph() {
     <Card>
       <CardHeader>
         <CardTitle>
-          Dotted Area Chart
+          Token Generation & Context Volume
           <Badge variant='outline'>
             <Icons.trendingUp />
-            -5.2%
+            +24.8%
           </Badge>
         </CardTitle>
-        <CardDescription>Showing total visitors for the last 6 months</CardDescription>
+        <CardDescription>Monthly prompt ingestion vs completion tokens in millions</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -68,20 +68,20 @@ export function AreaGraph() {
               <DottedBackgroundPattern config={chartConfig} />
             </defs>
             <Area
-              dataKey='mobile'
+              dataKey='completionTokens'
               type='natural'
-              fill='url(#dotted-background-pattern-mobile)'
+              fill='url(#dotted-background-pattern-completionTokens)'
               fillOpacity={0.4}
-              stroke='var(--color-mobile)'
+              stroke='var(--color-completionTokens)'
               stackId='a'
               strokeWidth={0.8}
             />
             <Area
-              dataKey='desktop'
+              dataKey='promptTokens'
               type='natural'
-              fill='url(#dotted-background-pattern-desktop)'
+              fill='url(#dotted-background-pattern-promptTokens)'
               fillOpacity={0.4}
-              stroke='var(--color-desktop)'
+              stroke='var(--color-promptTokens)'
               stackId='a'
               strokeWidth={0.8}
             />
