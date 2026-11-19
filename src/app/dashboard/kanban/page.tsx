@@ -2,7 +2,7 @@ import { auth } from '@clerk/nextjs/server';
 import KanbanViewPage from '@/features/kanban/components/kanban-view-page';
 
 export const metadata = {
-  title: 'Dashboard : Kanban view'
+  title: 'Dashboard: Fleet Tasks & Workflows'
 };
 
 export default async function page() {

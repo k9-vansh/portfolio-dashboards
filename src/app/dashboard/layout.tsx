@@ -10,8 +10,9 @@ import type { CSSProperties } from 'react';
 import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
-  title: 'Next Shadcn Dashboard Starter',
-  description: 'Basic dashboard with Next.js and Shadcn',
+  title: 'AI Telemetry & Fleet Operations',
+  description:
+    'Enterprise AI Agent telemetry, token spend observability, and autonomous fleet orchestration.',
   robots: {
     index: false,
     follow: false
