@@ -166,4 +166,4 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 ## 📄 License & Attribution
 
 This project is open source and available under the [MIT License](LICENSE).  
-Created by [k9-vansh](https://github.com/k9-vansh) • Originally based on foundations by [Kiranism](https://github.com/Kiranism).
+Created and developed by [k9-vansh](https://github.com/k9-vansh).

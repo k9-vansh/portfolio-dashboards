@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/shadcn-dashboard.png',
+        url: '/agentops-dashboard.png',
         width: 3200,
         height: 1600,
         alt: 'AgentOps Dashboard overview page'
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: 'AgentOps | AI Fleet & Token Telemetry Dashboard',
     description:
       'Production-ready AI Agent operations platform, token telemetry, latency monitoring, and multi-tenant agent fleet management built with Next.js 16 and Tailwind CSS.',
-    images: ['/shadcn-dashboard.png']
+    images: ['/agentops-dashboard.png']
   }
 };
 

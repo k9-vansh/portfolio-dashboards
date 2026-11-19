@@ -1,10 +1,10 @@
 {
-  "name": "next-shadcn-dashboard-starter",
+  "name": "agentops-telemetry-dashboard",
   "version": "1.0.0",
   "private": true,
   "author": {
-    "name": "Kiran",
-    "url": "https://github.com/Kiranism"
+    "name": "k9-vansh",
+    "url": "https://github.com/k9-vansh"
   },
   "scripts": {
     "dev": "next dev",
