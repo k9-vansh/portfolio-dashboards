@@ -6,6 +6,7 @@ import { ThemeModeToggle } from '../themes/theme-mode-toggle';
 import CtaGithub from './cta-github';
 import { SidebarToggle } from './sidebar-toggle';
 import { NotificationCenter } from '@/features/notifications/components/notification-center';
+import { GuestHeaderBadge } from './guest-header-badge';
 
 export default function Header() {
   return (
@@ -20,6 +21,7 @@ export default function Header() {
       </div>
 
       <div className='flex shrink-0 items-center gap-1'>
+        <GuestHeaderBadge />
         <SearchInput />
         <CtaGithub />
         <ThemeModeToggle />

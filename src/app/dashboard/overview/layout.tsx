@@ -1,4 +1,4 @@
-import { auth } from '@clerk/nextjs/server';
+import { protectPage } from '@/lib/auth-guard';
 import PageContainer from '@/components/layout/page-container';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -23,7 +23,7 @@ export default async function OverViewLayout({
   bar_stats: React.ReactNode;
   area_stats: React.ReactNode;
 }) {
-  await auth.protect();
+  await protectPage();
 
   return (
     <PageContainer>

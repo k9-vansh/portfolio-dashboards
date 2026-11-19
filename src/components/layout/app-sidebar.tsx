@@ -241,6 +241,16 @@ function NavUser() {
   const { isMobile, state } = useSidebar();
   const railMenu = state === 'collapsed' && !isMobile;
 
+  const handleExitGuest = async () => {
+    try {
+      await fetch('/api/auth/guest', { method: 'DELETE' });
+    } catch {
+      // ignore
+    }
+    router.push('/auth/sign-in');
+    router.refresh();
+  };
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -253,8 +263,34 @@ function NavUser() {
               />
             }
           >
-            {user && <UserAvatarProfile className='size-8 rounded-lg' showInfo user={user} />}
-            <Icons.chevronsUpDown className='text-muted-foreground ml-auto size-4' />
+            {user ? (
+              <UserAvatarProfile className='size-8 rounded-lg' showInfo user={user} />
+            ) : (
+              <>
+                <div className='flex size-8 shrink-0 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 font-mono text-xs font-semibold text-emerald-400'>
+                  GO
+                </div>
+                <div
+                  className={`grid flex-1 text-left text-sm leading-tight transition-all duration-200 ease-in-out ${
+                    state === 'collapsed'
+                      ? 'invisible max-w-0 overflow-hidden opacity-0'
+                      : 'visible max-w-full opacity-100'
+                  }`}
+                >
+                  <span className='truncate font-semibold'>Guest Operator</span>
+                  <span className='truncate font-mono text-[11px] text-emerald-400'>
+                    Demo Access
+                  </span>
+                </div>
+              </>
+            )}
+            <Icons.chevronsUpDown
+              className={`text-muted-foreground ml-auto size-4 transition-all duration-200 ease-in-out ${
+                state === 'collapsed'
+                  ? 'invisible max-w-0 opacity-0'
+                  : 'visible max-w-full opacity-100'
+              }`}
+            />
           </DropdownMenuTrigger>
           {/* Desktop: opens to the right, bottom edge aligned with the content panel
               (alignOffset -8); 8px gap when expanded, 16px off the icon rail.
@@ -268,14 +304,36 @@ function NavUser() {
           >
             <DropdownMenuGroup>
               <DropdownMenuLabel className='text-foreground px-1.5 py-1.5 font-normal'>
-                {user && <UserAvatarProfile className='size-8 rounded-lg' showInfo user={user} />}
+                {user ? (
+                  <UserAvatarProfile className='size-8 rounded-lg' showInfo user={user} />
+                ) : (
+                  <div className='flex items-center gap-2'>
+                    <div className='flex size-8 shrink-0 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 font-mono text-xs font-semibold text-emerald-400'>
+                      GO
+                    </div>
+                    <div className='grid flex-1 text-left text-sm leading-tight'>
+                      <span className='truncate font-semibold'>Guest Operator</span>
+                      <span className='text-muted-foreground truncate text-xs'>
+                        guest.preview@agentops.ai
+                      </span>
+                    </div>
+                  </div>
+                )}
               </DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => router.push('/dashboard/profile')}>
-                <Icons.account />
-                Profile
+              <DropdownMenuItem onClick={() => router.push('/dashboard/overview')}>
+                <Icons.dashboard />
+                Telemetry Overview
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push('/dashboard/ai-chat')}>
+                <Icons.sparkles />
+                Agent Copilot
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push('/dashboard/kanban')}>
+                <Icons.kanban />
+                Fleet Tasks
               </DropdownMenuItem>
               {organization && (
                 <DropdownMenuItem onClick={() => router.push('/dashboard/billing')}>
@@ -283,17 +341,20 @@ function NavUser() {
                   Billing
                 </DropdownMenuItem>
               )}
-              <DropdownMenuItem onClick={() => router.push('/dashboard/notifications')}>
-                <Icons.notification />
-                Notifications
-              </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => signOut({ redirectUrl: '/auth/sign-in' })}>
-                <Icons.logout aria-hidden />
-                Sign out
-              </DropdownMenuItem>
+              {user ? (
+                <DropdownMenuItem onClick={() => signOut({ redirectUrl: '/auth/sign-in' })}>
+                  <Icons.logout aria-hidden />
+                  Sign out
+                </DropdownMenuItem>
+              ) : (
+                <DropdownMenuItem onClick={handleExitGuest}>
+                  <Icons.logout aria-hidden />
+                  Exit Guest Demo
+                </DropdownMenuItem>
+              )}
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

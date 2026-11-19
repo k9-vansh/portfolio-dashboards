@@ -1,9 +1,9 @@
-import { auth } from '@clerk/nextjs/server';
+import { protectPage } from '@/lib/auth-guard';
 import { delay } from '@/constants/mock-api';
 import { BarGraph } from '@/features/overview/components/bar-graph';
 
 export default async function BarStats() {
-  await auth.protect();
+  await protectPage();
 
   await delay(1000);
 
